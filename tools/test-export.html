@@ -1,0 +1,38 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>export test</title>
+<style>body{background:#111;color:#fff;font:14px sans-serif}canvas{border:1px solid #888;display:block;margin:6px 0}</style>
+</head><body>
+<div id="info">running…</div>
+<canvas id="a" width="1600" height="900" style="width:800px"></canvas>
+<canvas id="b" width="1200" height="675" style="width:600px"></canvas>
+<canvas id="c" width="1080" height="1080" style="width:360px"></canvas>
+<script type="module">
+import { FILMS, SLOTS, SLOT_ORDER } from '../app/src/data.js';
+import { drawCover, drawSquare } from '../app/src/cover.js';
+const PHOTOS = ['main-hero','hero-don','don-table','consigliere','widow','enforcer','driver','lookout','detective','sergeant','officer','riot','racer','mentor','spark','fighter','standoff','street'];
+const images = {};
+await Promise.all(PHOTOS.map(id => new Promise(res => {
+  const im = new Image();
+  im.onload = () => { images[id] = im; res(); };
+  im.onerror = () => res();
+  im.src = `../app/photos/${id}.jpg`;
+})));
+await Promise.all([document.fonts.load('100px Anton'), document.fonts.load('60px Pacifico'), document.fonts.ready]);
+const cast = {};
+for (const s of SLOT_ORDER) cast[s] = { ...SLOTS[s] };
+const photos = {};
+for (const s of SLOT_ORDER) photos[s] = SLOTS[s].photo;
+const state = { film: 'omerta', grade: 'rain', layout: 'wide',
+  words: { title: 'OMERTÀ', subtitle: 'The Code of Silence', quote: 'SILENCE IS THE ONLY ALIBI', paper: 'THE UNDERWORLD GAZETTE', tagline: 'SWEAR IT · KEEP IT · OR ELSE', vol: '07' },
+  cast, photos, upload: {} };
+drawCover(document.getElementById('a'), state, images);
+drawCover(document.getElementById('b'), state, images);
+drawSquare(document.getElementById('c'), state, images);
+const sizes = [];
+for (const id of ['a','b','c']) {
+  const blob = await new Promise(r => document.getElementById(id).toBlob(r, 'image/png'));
+  sizes.push(`${id}=${blob.size}B`);
+}
+document.getElementById('info').textContent = 'EXPORT OK: ' + sizes.join('  ');
+window.__shotReady = true;
+</script></body></html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Family Cover Studio — 1950s mafia noir billboard maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <h1>THE FAMILY <span>Cover Studio</span></h1>
+    <p>Your photos become a 1950s mafia noir billboard — 16:9 landscape, three gangs, one hero.</p>
+  </div>
+  <div id="status" class="status" role="status">Loading photos…</div>
+</header>
+<main class="studio">
+  <section class="left">
+    <div class="preview-wrap"><canvas id="preview" width="1600" height="900" aria-label="Cover preview"></canvas></div>
+    <div class="thumbs" id="thumbs" aria-label="Films"></div>
+    <div class="strip" id="strip" aria-label="Photos"></div>
+    <p class="hint">Click a photo, then click a panel in the preview to swap who appears there. Upload replaces the selected slot&rsquo;s photo.</p>
+  </section>
+  <aside class="panel">
+    <section>
+      <h2>Film</h2>
+      <div class="btnrow" id="filmBtns">
+        <button type="button" data-film="family" class="active">The Family</button>
+        <button type="button" data-film="omerta">Omertà</button>
+        <button type="button" data-film="blood">Blood &amp; Silk</button>
+      </div>
+    </section>
+    <section>
+      <h2>Words</h2>
+      <div class="grid2">
+        <label>Title<input id="wTitle" type="text" maxlength="24" value="THE FAMILY"></label>
+        <label>Subtitle<input id="wSubtitle" type="text" maxlength="40" value="Blood Runs Thicker"></label>
+        <label>Quote<input id="wQuote" type="text" maxlength="60" value="EVERY FAMILY HAS ITS PRICE"></label>
+        <label>Newspaper<input id="wPaper" type="text" maxlength="30" value="THE DAILY RACKET"></label>
+        <label>Tagline<input id="wTagline" type="text" maxlength="48" value="LOYALTY · SILENCE · VENGEANCE"></label>
+        <label>VOL<input id="wVol" type="text" maxlength="4" value="13"></label>
+      </div>
+    </section>
+    <section>
+      <h2>Cast</h2>
+      <div class="grid2">
+        <label>Slot<select id="castSlot"></select></label>
+        <label>Name<input id="castName" type="text" maxlength="24"></label>
+        <label>Place<input id="castPlace" type="text" maxlength="24"></label>
+        <label>Time<input id="castTime" type="text" maxlength="12"></label>
+      </div>
+      <div class="btnrow">
+        <button type="button" id="applyPhoto">Use selected photo for this slot</button>
+        <span id="castPhoto" class="mini"></span>
+      </div>
+    </section>
+    <section>
+      <h2>Grade</h2>
+      <div class="btnrow" id="gradeBtns">
+        <button type="button" data-grade="noir" class="active">Noir</button>
+        <button type="button" data-grade="rain">Rain Noir</button>
+        <button type="button" data-grade="crimson">Crimson</button>
+      </div>
+    </section>
+    <section>
+      <h2>Layout</h2>
+      <div class="btnrow" id="layoutBtns">
+        <button type="button" data-layout="center" class="active">Center Hero</button>
+        <button type="button" data-layout="wide">Wide Hero</button>
+        <button type="button" data-layout="mirrored">Mirrored</button>
+      </div>
+    </section>
+    <section>
+      <h2>Export PNG</h2>
+      <div class="btnrow" id="sizeBtns">
+        <button type="button" data-w="1600" data-h="900" class="active">1600 × 900</button>
+        <button type="button" data-w="1200" data-h="675">1200 × 675</button>
+        <button type="button" data-w="1080" data-h="1080" data-square="1">1080 × 1080</button>
+      </div>
+      <div class="btnrow">
+        <button type="button" id="exportOne" class="primary">Export PNG</button>
+        <button type="button" id="exportAll">Export all 3 sizes</button>
+      </div>
+      <label class="upload">Upload a photo for the selected slot
+        <input id="upload" type="file" accept="image/*">
+      </label>
+    </section>
+  </aside>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
